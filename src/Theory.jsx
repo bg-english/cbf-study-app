@@ -74,18 +74,18 @@ export default function Theory() {
           <div style={{ background: '#eff6ff', borderRadius: 12, padding: '1rem' }}>
             <h4 style={{ color: '#1e40af', marginBottom: '0.75rem', fontSize: '1rem' }}>✅ Present Simple</h4>
             <ul style={{ paddingLeft: '1rem', fontSize: '0.88rem', lineHeight: 1.8 }}>
-              <li>Habits & routines: <em>She takes the bus every day.</em></li>
-              <li>Facts & permanent states: <em>He has a bookstore.</em></li>
-              <li>Likes & dislikes: <em>I like supermarkets.</em></li>
+              <li>Habits & routines: <em>He reads the news every morning.</em></li>
+              <li>Facts & permanent states: <em>My aunt has a coffee shop.</em></li>
+              <li>Likes & dislikes: <em>She loves spicy food.</em></li>
               <li>Schedules: <em>The class starts at 8.</em></li>
             </ul>
           </div>
           <div style={{ background: '#f0fdf4', borderRadius: 12, padding: '1rem' }}>
             <h4 style={{ color: '#065f46', marginBottom: '0.75rem', fontSize: '1rem' }}>🔄 Present Continuous</h4>
             <ul style={{ paddingLeft: '1rem', fontSize: '0.88rem', lineHeight: 1.8 }}>
-              <li>Happening RIGHT NOW: <em>Look! She is wearing a hat.</em></li>
+              <li>Happening RIGHT NOW: <em>Look at that! It's snowing outside.</em></li>
               <li>Temporary situations: <em>I'm staying at a hotel.</em></li>
-              <li>Signal words: <strong>now, at the moment, look!</strong></li>
+              <li>Signal words: <strong>now, right now, at the moment, listen!</strong></li>
               <li>Future plans: <em>We are meeting tomorrow.</em></li>
             </ul>
           </div>
@@ -97,9 +97,9 @@ export default function Theory() {
               <tr><th>Form</th><th>Positive</th><th>Negative</th><th>Question</th></tr>
             </thead>
             <tbody>
-              <tr><td>P. Simple (I/You/We/They)</td><td>I <strong>like</strong></td><td>I <strong>don't like</strong></td><td><strong>Do</strong> you like?</td></tr>
-              <tr><td>P. Simple (He/She/It)</td><td>She <strong>takes</strong></td><td>She <strong>doesn't take</strong></td><td><strong>Does</strong> she take?</td></tr>
-              <tr><td>P. Continuous (all)</td><td>He <strong>is wearing</strong></td><td>He <strong>isn't wearing</strong></td><td><strong>Is</strong> he wearing?</td></tr>
+              <tr><td>P. Simple (I/You/We/They)</td><td>I <strong>love</strong></td><td>I <strong>don't love</strong></td><td><strong>Do</strong> you love?</td></tr>
+              <tr><td>P. Simple (He/She/It)</td><td>He <strong>reads</strong></td><td>He <strong>doesn't read</strong></td><td><strong>Does</strong> he read?</td></tr>
+              <tr><td>P. Continuous (all)</td><td>It <strong>is raining</strong></td><td>It <strong>isn't raining</strong></td><td><strong>Is</strong> it raining?</td></tr>
             </tbody>
           </table>
         </div>
@@ -109,8 +109,8 @@ export default function Theory() {
         </div>
 
         <div className="example-row">
-          <div className="example-box correct"><div className="label">✓ Correct</div>She <strong>doesn't wear</strong> her uniform. (habit)</div>
-          <div className="example-box wrong"><div className="label">✗ Wrong</div>She <strong>isn't wearing</strong> her uniform at the moment... wait, this IS correct if she's not wearing it right now! Check context.</div>
+          <div className="example-box correct"><div className="label">✓ Correct</div>He <strong>doesn't drink</strong> coffee. (general fact)</div>
+          <div className="example-box wrong"><div className="label">✗ Wrong</div>He <strong>isn't drinking</strong> coffee. ← Only wrong if it's a general fact. If he's not drinking it right NOW, the continuous IS correct! Always check context.</div>
         </div>
       </div>
 
@@ -158,9 +158,9 @@ export default function Theory() {
               <tr><th>Sentence</th><th>Past Simple</th><th>Past Continuous</th></tr>
             </thead>
             <tbody>
-              <tr><td>I met a friend while doing shopping.</td><td>met</td><td>was doing</td></tr>
-              <tr><td>I sat in a café when you called.</td><td>called</td><td>was sitting</td></tr>
-              <tr><td>Ann waited for me when I arrived.</td><td>arrived</td><td>was waiting</td></tr>
+              <tr><td>She was reading when the phone rang.</td><td>rang</td><td>was reading</td></tr>
+              <tr><td>My dad was fixing the car when he hurt his hand.</td><td>hurt</td><td>was fixing</td></tr>
+              <tr><td>The kids were playing when it started to rain.</td><td>started</td><td>were playing</td></tr>
             </tbody>
           </table>
         </div>
@@ -200,11 +200,11 @@ export default function Theory() {
 
         <Accordion title="📝 Fill-in-the-Blank Examples" icon="✏️">
           <ul style={{ lineHeight: 2, paddingLeft: '1rem' }}>
-            <li>She <strong>used to live</strong> in Bogotá before moving to Barranquilla. (state → only used to)</li>
-            <li>My brother <strong>didn't use to play</strong> video games before he got a console.</li>
-            <li>We <strong>used to visit</strong> our grandparents every Christmas. (could also be "would visit")</li>
-            <li>Mr. García <strong>used to teach</strong> at a different school. (state/fact → used to)</li>
-            <li>Every evening, my grandfather <strong>would sit</strong> / <strong>used to sit</strong> on the porch. (Both correct!)</li>
+            <li>Carlos <strong>used to be</strong> afraid of spiders, but now he's fine. (state → only used to)</li>
+            <li>My parents <strong>didn't use to have</strong> a TV in their bedroom. (negative state)</li>
+            <li>The kids <strong>used to play / would play</strong> in the park every afternoon. (habit → both correct!)</li>
+            <li>The old building <strong>used to be</strong> a railway station. (past state/fact → only used to)</li>
+            <li>My grandmother <strong>would tell / used to tell</strong> us stories before bedtime. (Both correct!)</li>
           </ul>
         </Accordion>
       </div>
@@ -331,7 +331,7 @@ export default function Theory() {
 
         <div className="rule-box green">
           <strong>Model Answer:</strong><br /><br />
-          "During Easter break, I <strong>visited</strong> my grandparents in Santa Marta. The weather <strong>was</strong> beautiful. While my cousin <strong>was swimming</strong> in the pool, I <strong>read</strong> a book by the hammock. On Saturday, we <strong>went</strong> to the beach. I <strong>had</strong> never seen such clear water! We <strong>were playing</strong> volleyball when it <strong>started</strong> to rain, so we <strong>ran</strong> inside and <strong>ate</strong> fried fish instead."
+          "Last weekend, I <strong>visited</strong> my cousins in Cartagena. The city <strong>was</strong> stunning. While my cousin <strong>was surfing</strong>, I <strong>relaxed</strong> on the beach and <strong>read</strong> a book. On Saturday evening, we <strong>walked</strong> along the old city walls. The views <strong>were</strong> incredible! We <strong>were taking</strong> photos when it <strong>started</strong> to rain, so we <strong>ran</strong> to a café and <strong>ate</strong> empanadas while we <strong>waited</strong> for the sun to come back."
         </div>
 
         <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>

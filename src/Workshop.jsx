@@ -11,12 +11,12 @@ const workshopSections = [
     tagClass: 'tag-blue',
     instructions: 'Complete each sentence with the correct form of the verb in brackets (Present Simple or Present Continuous).',
     questions: [
-      { id: 'g1', text: '1. I _____________ supermarkets, but my father doesn\'t. (like)', answer: 'like', acceptedAnswers: ['like'], explanation: 'This is a general preference/fact → Present Simple. I + base verb.' },
-      { id: 'g2', text: '2. Look! That lady _____________ her uniform. (not/wear)', answer: 'isn\'t wearing', acceptedAnswers: ["isn't wearing", "is not wearing"], explanation: '"Look!" signals Present Continuous. Negative continuous: isn\'t wearing.' },
-      { id: 'g3', text: '3. She _____________ the bus to school. (not/take)', answer: "doesn't take", acceptedAnswers: ["doesn't take", "does not take"], explanation: 'Habitual action → Present Simple. She + doesn\'t + base verb.' },
-      { id: 'g4', text: '4. _____ they _____ at the moment? (text)', answer: 'Are / texting', acceptedAnswers: ['are / texting', 'are texting', 'are they texting'], explanation: '"At the moment" → Present Continuous question: Are + they + verb-ing?' },
-      { id: 'g5', text: '5. Mark _____________ a bookstore. (have)', answer: 'has', acceptedAnswers: ['has'], explanation: '"Have" as ownership is stative. He/Mark → has (never "is having").' },
-      { id: 'g6', text: '6. Sam _____________ a cup of tea now. (have)', answer: 'is having', acceptedAnswers: ['is having'], explanation: '"Now" signals continuous. "Have" meaning "to consume/drink" CAN be continuous.' },
+      { id: 'g1', text: '1. My dad _____________ (work) from home every day.', answer: 'works', acceptedAnswers: ['works'], explanation: 'Daily routine → Present Simple. He/My dad takes the -s ending: works.' },
+      { id: 'g2', text: '2. Listen! Someone _____________ at the door. (knock)', answer: 'is knocking', acceptedAnswers: ['is knocking'], explanation: '"Listen!" signals something happening RIGHT NOW → Present Continuous: is knocking.' },
+      { id: 'g3', text: '3. Lucas _____________ coffee. He prefers tea. (not/drink)', answer: "doesn't drink", acceptedAnswers: ["doesn't drink", "does not drink"], explanation: 'General fact/preference → Present Simple. He + doesn\'t + base verb.' },
+      { id: 'g4', text: '4. _____ you _____ your homework right now? (do)', answer: 'Are / doing', acceptedAnswers: ['are / doing', 'are doing', 'are you doing'], explanation: '"Right now" → Present Continuous question: Are + you + verb-ing?' },
+      { id: 'g5', text: '5. The library _____________ at nine o\'clock every morning. (open)', answer: 'opens', acceptedAnswers: ['opens'], explanation: 'Scheduled/regular fact → Present Simple. It + opens (third person -s).' },
+      { id: 'g6', text: '6. Sorry, I can\'t talk. I _____________ lunch right now. (have)', answer: 'am having', acceptedAnswers: ['am having'], explanation: '"Right now" + "have" meaning to eat → Present Continuous. I + am having.' },
     ]
   },
   {
@@ -26,10 +26,10 @@ const workshopSections = [
     tagClass: 'tag-blue',
     instructions: 'Complete with Past Simple or Past Continuous of the verb in brackets.',
     questions: [
-      { id: 'p1', text: '1. The house _____________ £150,000 in 2003. (cost)', answer: 'cost', acceptedAnswers: ['cost'], explanation: '"Cost" is irregular: cost → cost. Completed past fact → Past Simple.' },
-      { id: 'p2', text: '2. I _____________ a friend while I _____________ the shopping. (meet / do)', answer: 'met / was doing', acceptedAnswers: ['met / was doing', 'met, was doing'], explanation: 'Short completed action: met. Ongoing background: was doing.' },
-      { id: 'p3', text: '3. I _____________ in a café when you _____________. (sit / call)', answer: 'was sitting / called', acceptedAnswers: ['was sitting / called', 'was sitting, called'], explanation: 'Background ongoing: was sitting. Interruption: called.' },
-      { id: 'p4', text: '4. Ann _____________ for me when I _____________. (wait / arrive)', answer: 'was waiting / arrived', acceptedAnswers: ['was waiting / arrived', 'was waiting, arrived'], explanation: 'Ann\'s waiting was continuous background. My arrival interrupted it.' },
+      { id: 'p1', text: '1. The storm _____________ all night and flooded three streets. (last)', answer: 'lasted', acceptedAnswers: ['lasted'], explanation: '"Lasted" is regular: last → lasted. Completed past fact → Past Simple.' },
+      { id: 'p2', text: '2. Sofia _____________ her homework when her phone _____________. (do / ring)', answer: 'was doing / rang', acceptedAnswers: ['was doing / rang', 'was doing, rang'], explanation: 'Ongoing background: was doing. Short interruption: rang (irregular: ring → rang).' },
+      { id: 'p3', text: '3. We _____________ home when we _____________ a shooting star. (walk / see)', answer: 'were walking / saw', acceptedAnswers: ['were walking / saw', 'were walking, saw'], explanation: 'Background ongoing: were walking. Sudden completed action: saw (irregular: see → saw).' },
+      { id: 'p4', text: '4. The teacher _____________ the rule when the bell _____________. (explain / ring)', answer: 'was explaining / rang', acceptedAnswers: ['was explaining / rang', 'was explaining, rang'], explanation: 'The explanation was ongoing background. The bell ringing was the interruption.' },
     ]
   },
   {
@@ -39,10 +39,10 @@ const workshopSections = [
     tagClass: 'tag-blue',
     instructions: 'Fill in the blank with the correct form of "used to" + the verb in parentheses.',
     questions: [
-      { id: 'u1', text: '1. She _____________ (live) in Bogotá before moving to Barranquilla.', answer: 'used to live', acceptedAnswers: ['used to live'], explanation: 'State (living somewhere) → only "used to" works.' },
-      { id: 'u2', text: '2. My brother _____________ (not / play) video games before he got a console.', answer: "didn't use to play", acceptedAnswers: ["didn't use to play", "used not to play"], explanation: 'Negative of used to: didn\'t use to + base verb.' },
-      { id: 'u3', text: '3. We _____________ (visit) our grandparents every Christmas when we were kids.', answer: 'used to visit', acceptedAnswers: ['used to visit', 'would visit'], explanation: 'Repeated action → both "used to visit" and "would visit" are correct!' },
-      { id: 'u4', text: '4. Mr. García _____________ (teach) at a different school before coming to CBF.', answer: 'used to teach', acceptedAnswers: ['used to teach'], explanation: 'This implies a state/fact about his past situation → "used to" preferred.' },
+      { id: 'u1', text: '1. Carlos _____________ (be) very shy, but now he loves public speaking.', answer: 'used to be', acceptedAnswers: ['used to be'], explanation: 'Being shy is a PAST STATE → only "used to be" is correct. "Would be" does not work for states.' },
+      { id: 'u2', text: '2. My parents _____________ (not / have) a car when they were young.', answer: "didn't use to have", acceptedAnswers: ["didn't use to have", "used not to have"], explanation: 'Negative of used to: didn\'t use to + base verb. "Having" a car is a state → not "would."' },
+      { id: 'u3', text: '3. We _____________ (go) to the cinema every Friday night when I was a child.', answer: 'used to go', acceptedAnswers: ['used to go', 'would go'], explanation: 'Repeated Friday-night action (habit) → both "used to go" and "would go" are correct!' },
+      { id: 'u4', text: '4. The old building on the corner _____________ (be) a railway station a hundred years ago.', answer: 'used to be', acceptedAnswers: ['used to be'], explanation: 'Being a railway station is a past STATE → only "used to be." "Would be" cannot describe states.' },
     ]
   },
   {
@@ -91,19 +91,19 @@ const workshopSections = [
     questions: [
       {
         id: 'b1',
-        text: '1. Based on 1 John 2:17, what could you teach a young person about clinging to the world and its desires?',
-        answer: 'I would teach them that worldly things like money, popularity, and material possessions are temporary and will pass away. Only doing God\'s will has eternal value. Instead of chasing likes on social media or the latest trends, we should invest in relationships with God and others, in kindness and honesty — things that last forever.',
-        acceptedAnswers: ['pass away', 'temporary', 'eternal', 'will of god', 'forever'],
-        explanation: 'Key ideas: worldly desires are temporary (pass away); God\'s will leads to eternal life; practical application to student life.',
+        text: '1. Think about 1 John 2:17: "The world and its desires pass away, but whoever does the will of God lives forever." Describe a real situation where young people today chase things that "pass away." What would a life guided by God\'s will look like instead?',
+        answer: 'Young people today chase things like social media followers, brand-name clothes, or popularity — all of which are temporary and will pass away. A life guided by God\'s will would focus on things that last: kindness, honesty, helping others, and a genuine relationship with God. These things have eternal value because they do not fade away like trends or fame.',
+        acceptedAnswers: ['pass away', 'temporary', 'god', 'eternal', 'forever', 'lasting', 'social media', 'trend'],
+        explanation: 'Key elements: name a specific worldly thing that passes away → contrast with something God-centered that lasts → connect to the verse\'s promise of eternal life.',
         isOpen: true,
         minWords: 30,
       },
       {
         id: 'b2',
-        text: '2. Does Matthew 5:42 agree with avoiding generosity to accumulate wealth and popularity? Explain.',
-        answer: 'No, Matthew 5:42 does NOT agree. Jesus commands us to "give to the one who asks you." This is the opposite of accumulating wealth or avoiding generosity. The world\'s culture tells us to protect what we have, but Jesus calls us to radical, counter-cultural generosity.',
-        acceptedAnswers: ['no', 'generous', 'give', 'disagrees', 'opposite'],
-        explanation: 'Must clearly say NO and explain the verse\'s call to generosity as the counter to worldly hoarding.',
+        text: '2. Matthew 5:42 says: "Give to the one who asks you." As a student, describe one specific and concrete way you could live this verse out this week at school or at home. Why do most people find it hard to be truly generous?',
+        answer: 'One specific way I could live this verse is by sharing my lunch with a classmate who forgot theirs, or helping a friend study even when I am tired. Most people find it hard to be truly generous because we are naturally focused on our own needs and comfort. We fear that giving will leave us with less. But Jesus calls us to trust God and give freely, just as He gave us His son.',
+        acceptedAnswers: ['give', 'generous', 'share', 'help', 'specific', 'hard', 'difficult', 'comfort', 'trust'],
+        explanation: 'Must include: (1) a specific concrete action at school or home; (2) an explanation of why generosity is challenging for people.',
         isOpen: true,
         minWords: 30,
       },
