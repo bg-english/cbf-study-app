@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import judahImg from './assets/judah-lion.png'
 import logoImg from './assets/logo-boston-flex.png'
 
@@ -545,6 +545,300 @@ function ReadingPractice() {
   )
 }
 
+// ─── CROSSWORD ────────────────────────────────────────────────────────────
+const CW_ROWS = 9
+const CW_COLS = 13
+
+// Grid layout (normalized 0-based rows/cols):
+//   1-Down  GROWUP     (0,3)  down
+//   2-Down  ENCOURAGE  (0,6)  down
+//   3-Across CHARMING  (1,0)  across
+//   4-Down  HABIT      (1,1)  down
+//   5-Across TURNINTO  (4,5)  across
+//   6-Across GETALONG  (6,3)  across
+//
+// Intersections:
+//   (1,1) = H  CHARMING ∩ HABIT
+//   (1,3) = R  CHARMING ∩ GROWUP
+//   (1,6) = N  CHARMING ∩ ENCOURAGE
+//   (4,6) = U  TURNINTO ∩ ENCOURAGE
+//   (6,6) = A  GETALONG ∩ ENCOURAGE
+
+const cwWords = [
+  { id: 'growup',    word: 'GROWUP',    dir: 'down',   row: 0, col: 3, num: 1, clue: 'Phrasal verb: to develop from a child into an adult' },
+  { id: 'encourage', word: 'ENCOURAGE', dir: 'down',   row: 0, col: 6, num: 2, clue: 'To give support or confidence to someone' },
+  { id: 'charming',  word: 'CHARMING',  dir: 'across', row: 1, col: 0, num: 3, clue: 'Delightful; very attractive or pleasant' },
+  { id: 'habit',     word: 'HABIT',     dir: 'down',   row: 1, col: 1, num: 4, clue: 'A routine done regularly; what Present Simple describes' },
+  { id: 'turninto',  word: 'TURNINTO',  dir: 'across', row: 4, col: 5, num: 5, clue: 'Phrasal verb: to transform into something else (2 words, no space)' },
+  { id: 'getalong',  word: 'GETALONG',  dir: 'across', row: 6, col: 3, num: 6, clue: 'Phrasal verb: to have a good relationship with someone (2 words, no space)' },
+]
+
+const buildCwCells = () => {
+  const map = {}
+  cwWords.forEach(w => {
+    for (let i = 0; i < w.word.length; i++) {
+      const r = w.dir === 'across' ? w.row : w.row + i
+      const c = w.dir === 'across' ? w.col + i : w.col
+      const key = `${r},${c}`
+      if (!map[key]) map[key] = { letter: w.word[i], wordIds: [], number: null }
+      if (!map[key].wordIds.includes(w.id)) map[key].wordIds.push(w.id)
+      if (i === 0) map[key].number = w.num
+    }
+  })
+  return map
+}
+const CW_CELLS = buildCwCells()
+
+function Crossword() {
+  const [inputs, setInputs] = useState({})
+  const [checked, setChecked] = useState(false)
+  const [revealed, setRevealed] = useState(false)
+  const [activeCell, setActiveCell] = useState(null)
+  const [activeDir, setActiveDir] = useState('across')
+  const inputRefs = useRef({})
+
+  const getActiveWord = (cell, dir) => {
+    if (!cell) return null
+    const c = CW_CELLS[cell]
+    if (!c) return null
+    return cwWords.find(w => w.dir === dir && c.wordIds.includes(w.id))
+      || cwWords.find(w => c.wordIds.includes(w.id))
+  }
+  const activeWord = getActiveWord(activeCell, activeDir)
+
+  const focusCell = (key) => setTimeout(() => inputRefs.current[key]?.focus(), 10)
+
+  const handleCellClick = (r, c) => {
+    const key = `${r},${c}`
+    if (!CW_CELLS[key]) return
+    if (activeCell === key) {
+      const cell = CW_CELLS[key]
+      const hasA = cwWords.some(w => w.dir === 'across' && cell.wordIds.includes(w.id))
+      const hasD = cwWords.some(w => w.dir === 'down' && cell.wordIds.includes(w.id))
+      if (hasA && hasD) setActiveDir(d => d === 'across' ? 'down' : 'across')
+    } else {
+      const cell = CW_CELLS[key]
+      const hasCurrentDir = cwWords.some(w => w.dir === activeDir && cell.wordIds.includes(w.id))
+      if (!hasCurrentDir) setActiveDir(d => d === 'across' ? 'down' : 'across')
+      setActiveCell(key)
+    }
+    focusCell(key)
+  }
+
+  const handleChange = (r, c, val) => {
+    if (revealed) return
+    const key = `${r},${c}`
+    const char = val.toUpperCase().replace(/[^A-Z]/g, '').slice(-1)
+    setInputs(prev => ({ ...prev, [key]: char }))
+    setChecked(false)
+    if (char && activeWord) {
+      const idx = activeWord.dir === 'across' ? c - activeWord.col : r - activeWord.row
+      const ni = idx + 1
+      if (ni < activeWord.word.length) {
+        const nr = activeWord.dir === 'across' ? r : activeWord.row + ni
+        const nc = activeWord.dir === 'across' ? activeWord.col + ni : c
+        const nk = `${nr},${nc}`
+        setActiveCell(nk)
+        focusCell(nk)
+      }
+    }
+  }
+
+  const handleKeyDown = (r, c, e) => {
+    const key = `${r},${c}`
+    if (e.key === 'Backspace') {
+      e.preventDefault()
+      if (inputs[key]) {
+        setInputs(prev => ({ ...prev, [key]: '' }))
+        setChecked(false)
+      } else if (activeWord) {
+        const idx = activeWord.dir === 'across' ? c - activeWord.col : r - activeWord.row
+        if (idx > 0) {
+          const pr = activeWord.dir === 'across' ? r : activeWord.row + idx - 1
+          const pc = activeWord.dir === 'across' ? activeWord.col + idx - 1 : c
+          const pk = `${pr},${pc}`
+          setInputs(prev => ({ ...prev, [pk]: '' }))
+          setActiveCell(pk)
+          focusCell(pk)
+          setChecked(false)
+        }
+      }
+      return
+    }
+    const arrows = { ArrowRight: [0,1], ArrowLeft: [0,-1], ArrowDown: [1,0], ArrowUp: [-1,0] }
+    if (arrows[e.key]) {
+      e.preventDefault()
+      const [dr, dc] = arrows[e.key]
+      let nr = r + dr, nc = c + dc
+      while (nr >= 0 && nr < CW_ROWS && nc >= 0 && nc < CW_COLS) {
+        const nk = `${nr},${nc}`
+        if (CW_CELLS[nk]) {
+          setActiveCell(nk)
+          focusCell(nk)
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') setActiveDir('across')
+          if (e.key === 'ArrowUp' || e.key === 'ArrowDown') setActiveDir('down')
+          break
+        }
+        nr += dr; nc += dc
+      }
+    }
+  }
+
+  const handleClueClick = (wordId) => {
+    const w = cwWords.find(x => x.id === wordId)
+    if (!w) return
+    setActiveDir(w.dir)
+    const key = `${w.row},${w.col}`
+    setActiveCell(key)
+    focusCell(key)
+  }
+
+  const revealAll = () => {
+    const all = {}
+    Object.entries(CW_CELLS).forEach(([k, cell]) => { all[k] = cell.letter })
+    setInputs(all)
+    setRevealed(true)
+    setChecked(false)
+  }
+  const reset = () => { setInputs({}); setChecked(false); setRevealed(false); setActiveCell(null) }
+
+  const totalCells = Object.keys(CW_CELLS).length
+  const filled = Object.values(inputs).filter(v => v).length
+  const allCorrect = checked && Object.entries(CW_CELLS).every(([k, cell]) => inputs[k] === cell.letter)
+  const someWrong = checked && !allCorrect && filled === totalCells
+
+  const inActiveWord = (r, c) => activeWord && CW_CELLS[`${r},${c}`]?.wordIds.includes(activeWord.id)
+
+  const CS = 32
+
+  return (
+    <div>
+      <p style={{ fontSize: '0.85rem', color: 'var(--gray-600)', marginBottom: '0.75rem' }}>
+        Haz clic en una celda y escribe. Haz clic otra vez para cambiar dirección (horizontal/vertical). Usa las flechas del teclado para navegar.
+      </p>
+      <p style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginBottom: '1.25rem' }}>
+        <strong>Nota:</strong> Las palabras de 2 palabras se escriben juntas sin espacio (ej. TURNINTO, GETALONG, GROWUP).
+      </p>
+
+      <div style={{ overflowX: 'auto', marginBottom: '1.25rem' }}>
+        <div style={{
+          display: 'inline-grid',
+          gridTemplateColumns: `repeat(${CW_COLS}, ${CS}px)`,
+          gap: 2,
+        }}>
+          {Array.from({ length: CW_ROWS * CW_COLS }, (_, idx) => {
+            const r = Math.floor(idx / CW_COLS)
+            const c = idx % CW_COLS
+            const key = `${r},${c}`
+            const cell = CW_CELLS[key]
+            const isActive = activeCell === key
+            const inWord = inActiveWord(r, c)
+            const correct = checked && inputs[key] && inputs[key] === cell?.letter
+            const wrong = checked && inputs[key] && inputs[key] !== cell?.letter
+
+            if (!cell) return (
+              <div key={key} style={{ width: CS, height: CS, background: '#1e293b', borderRadius: 2 }} />
+            )
+
+            return (
+              <div
+                key={key}
+                onClick={() => handleCellClick(r, c)}
+                style={{
+                  width: CS, height: CS, position: 'relative', borderRadius: 2, cursor: 'pointer',
+                  background: isActive ? '#fbbf24' : inWord ? '#dbeafe' : '#fff',
+                  border: `2px solid ${correct ? '#22c55e' : wrong ? '#ef4444' : isActive ? '#d97706' : inWord ? '#93c5fd' : '#9ca3af'}`,
+                  boxSizing: 'border-box',
+                }}
+              >
+                {cell.number && (
+                  <span style={{
+                    position: 'absolute', top: 1, left: 2,
+                    fontSize: '0.42rem', fontWeight: 700, color: '#374151',
+                    lineHeight: 1, pointerEvents: 'none', zIndex: 1,
+                  }}>{cell.number}</span>
+                )}
+                <input
+                  ref={el => { inputRefs.current[key] = el }}
+                  value={inputs[key] || ''}
+                  onChange={e => handleChange(r, c, e.target.value)}
+                  onKeyDown={e => handleKeyDown(r, c, e)}
+                  onFocus={() => setActiveCell(key)}
+                  maxLength={2}
+                  disabled={revealed}
+                  style={{
+                    position: 'absolute', inset: 0, width: '100%', height: '100%',
+                    border: 'none', outline: 'none', background: 'transparent',
+                    textAlign: 'center', fontSize: '0.78rem', fontWeight: 700,
+                    color: correct ? '#15803d' : wrong ? '#dc2626' : '#1e293b',
+                    textTransform: 'uppercase', cursor: 'pointer', padding: 0,
+                  }}
+                />
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: 8, marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+        <button className="btn btn-primary btn-sm" onClick={() => setChecked(true)} disabled={filled < totalCells}>✓ Verificar</button>
+        <button className="btn btn-outline btn-sm" onClick={revealAll}>👁 Revelar todo</button>
+        <button className="btn btn-outline btn-sm" onClick={reset}>↺ Reiniciar</button>
+      </div>
+
+      {allCorrect && (
+        <div className="feedback correct" style={{ marginBottom: '1rem' }}>
+          🎉 ¡Excelente! ¡Completaste el crucigrama correctamente!
+        </div>
+      )}
+      {someWrong && (
+        <div className="feedback wrong" style={{ marginBottom: '1rem' }}>
+          ❌ Algunas respuestas están incorrectas. Revisa las celdas rojas.
+        </div>
+      )}
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div>
+          <h4 style={{ color: 'var(--navy)', marginBottom: '0.6rem', fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Horizontal</h4>
+          {cwWords.filter(w => w.dir === 'across').map(w => (
+            <div
+              key={w.id}
+              onClick={() => handleClueClick(w.id)}
+              style={{
+                display: 'flex', gap: 6, marginBottom: '0.5rem', fontSize: '0.8rem',
+                cursor: 'pointer', padding: '0.3rem 0.5rem', borderRadius: 6,
+                background: activeWord?.id === w.id ? '#dbeafe' : 'transparent',
+                border: `1px solid ${activeWord?.id === w.id ? '#93c5fd' : 'transparent'}`,
+              }}
+            >
+              <span style={{ fontWeight: 700, color: 'var(--gold)', minWidth: 16 }}>{w.num}.</span>
+              <span style={{ color: 'var(--gray-700)', lineHeight: 1.4 }}>{w.clue}</span>
+            </div>
+          ))}
+        </div>
+        <div>
+          <h4 style={{ color: 'var(--navy)', marginBottom: '0.6rem', fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Vertical</h4>
+          {cwWords.filter(w => w.dir === 'down').map(w => (
+            <div
+              key={w.id}
+              onClick={() => handleClueClick(w.id)}
+              style={{
+                display: 'flex', gap: 6, marginBottom: '0.5rem', fontSize: '0.8rem',
+                cursor: 'pointer', padding: '0.3rem 0.5rem', borderRadius: 6,
+                background: activeWord?.id === w.id ? '#dbeafe' : 'transparent',
+                border: `1px solid ${activeWord?.id === w.id ? '#93c5fd' : 'transparent'}`,
+              }}
+            >
+              <span style={{ fontWeight: 700, color: 'var(--gold)', minWidth: 16 }}>{w.num}.</span>
+              <span style={{ color: 'var(--gray-700)', lineHeight: 1.4 }}>{w.clue}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── MAIN PRACTICE COMPONENT ──────────────────────────────────────────────
 export default function Practice({ onScoreUpdate }) {
   const [mcScores, setMcScores] = useState({})
@@ -592,6 +886,7 @@ export default function Practice({ onScoreUpdate }) {
           { key: 'reading', label: '📖 Reading', count: '4 MC + 1 open' },
           { key: 'flash', label: '🃏 Flashcards', count: '10 cards' },
           { key: 'match', label: '🔗 Matching', count: '6 pairs' },
+          { key: 'cross', label: '🔤 Crucigrama', count: '6 palabras' },
         ].map(tab => (
           <button
             key={tab.key}
@@ -681,6 +976,20 @@ export default function Practice({ onScoreUpdate }) {
             </div>
           </div>
           <MatchingGame />
+        </div>
+      )}
+
+      {/* CROSSWORD */}
+      {activeGame === 'cross' && (
+        <div className="card">
+          <div className="card-header">
+            <div className="card-icon">🔤</div>
+            <div>
+              <div className="card-title">Crucigrama de Vocabulario</div>
+              <div className="card-subtitle">Vocabulary from Theory — Charming, Encourage, Turn Into, Get Along, Grow Up</div>
+            </div>
+          </div>
+          <Crossword />
         </div>
       )}
     </div>
