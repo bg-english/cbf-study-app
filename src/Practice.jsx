@@ -58,22 +58,27 @@ const mcQuestions = [
   },
   {
     id: 'mc8', type: 'mc',
-    question: 'What was the writer\'s purpose in the Jacques Cousteau text?',
+    question: 'According to the Marie Curie text, what did she contribute during World War I?',
     options: [
-      "Teach readers how to make films",
-      "Explain how Cousteau made money",
-      "Introduce readers to Cousteau's life and achievements",
-      "Describe particular films by Cousteau"
+      "She invented the atomic bomb",
+      "She developed mobile X-ray units to treat wounded soldiers",
+      "She discovered radioactivity during the war",
+      "She served as a nurse on the front lines"
     ],
-    answer: 2,
-    explanation: 'The text covers Cousteau\'s childhood, career, inventions, war service, and films — this is an introduction to his remarkable life, not a guide to filmmaking or a financial biography.',
+    answer: 1,
+    explanation: 'Marie created mobile X-ray units — vehicles with X-ray machines — that were driven to the front lines to treat wounded soldiers. They saved thousands of lives and were nicknamed "petites Curies."',
   },
   {
     id: 'mc9', type: 'mc',
-    question: 'In the Cousteau text, what happened to him in the car accident?',
-    options: ["Burned both arms", "Injured his leg", "Broke his extremities (both arms)", "Hurt his eyes"],
+    question: 'What does the word "radioactivity" mean according to the Marie Curie text?',
+    options: [
+      "The use of X-rays in medicine",
+      "A type of dangerous chemical reaction",
+      "The ability of certain minerals to emit energy without any external source",
+      "The process of splitting atoms to release energy"
+    ],
     answer: 2,
-    explanation: 'The text states he was "seriously injured with two broken arms" — his extremities (arms) were broken. This matches option c.',
+    explanation: 'The text defines it clearly: radioactivity is "the ability to emit energy without any external source." Marie Curie invented the word itself to describe this property she discovered in certain minerals.',
   },
   {
     id: 'mc10', type: 'mc',
@@ -166,7 +171,7 @@ const flashcards = [
   { front: "Both used to / would are correct when…", back: "→ the action is a REPEATED HABIT (not a state)" },
   { front: "1 John 2:17 teaches us…", back: "→ Worldly desires pass away; God's will lasts forever" },
   { front: "'Give to the one who asks you' (Matt 5:42)", back: "→ Calls for radical generosity, opposite of hoarding" },
-  { front: "Cousteau's car accident consequence", back: "→ Two broken arms; led him to swim for recovery" },
+  { front: "Marie Curie's two Nobel Prizes", back: "→ 1903: Physics (radioactivity) · 1911: Chemistry — only person to win in two different sciences" },
   { front: "Phrasal verb: Turn into", back: "→ To transform/change into something else" },
   { front: "Negative: used to (standard form)", back: "→ didn't use to + verb (base)" },
 ]

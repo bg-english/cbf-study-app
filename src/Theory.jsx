@@ -215,7 +215,7 @@ export default function Theory() {
           <div className="card-icon">📖</div>
           <div>
             <div className="card-title">Reading Comprehension Skills</div>
-            <div className="card-subtitle">Jacques Cousteau & general strategies</div>
+            <div className="card-subtitle">Strategies for understanding any text</div>
           </div>
         </div>
         <span className="theory-tag reading">Reading</span>
@@ -231,25 +231,48 @@ export default function Theory() {
             <li><strong>Describe</strong> = paint a picture with words</li>
           </ul>
           <div className="rule-box green" style={{ marginTop: '0.75rem' }}>
-            For Cousteau: The writer introduces readers to an extraordinary person — his life, achievements, and legacy. The correct answer is <strong>c) introduce readers to the filmmaker Jacques-Yves Cousteau</strong>.
+            <strong>Tip:</strong> Look at the whole text — not just one paragraph. Ask yourself: <em>Is the writer mostly teaching me facts? Telling a story? Arguing a point?</em> The overall structure reveals the purpose.
           </div>
         </Accordion>
 
         <Accordion title="🔍 Specific Detail Questions" icon="🔍">
-          <p>Find the exact information in the text. For Cousteau:</p>
+          <p>These questions ask you to find exact information stated in the text. Strategy:</p>
           <ul style={{ paddingLeft: '1rem', lineHeight: 1.8, marginTop: '0.5rem' }}>
-            <li>As a child → <strong>delicate health</strong> (sickly boy, spent time in bed)</li>
-            <li>Car accident → <strong>broke his extremities</strong> (two broken arms)</li>
-            <li>Why breathing equipment → <strong>to extend underwater investigations</strong> (recovery led to passion)</li>
-            <li>During WWII → worked with <strong>underground resistance fighters in France</strong> (French Resistance)</li>
+            <li>Read the question carefully — underline key words</li>
+            <li>Go back to the text and scan for those key words</li>
+            <li>Read the surrounding sentences, not just the one with the key word</li>
+            <li>Answer in your own words, but stay close to what the text says</li>
+          </ul>
+          <div className="rule-box" style={{ marginTop: '0.5rem' }}>
+            <strong>Example:</strong> "What obstacles did Marie Curie face?" → Scan for words like <em>obstacle, challenge, difficult, not allowed, poor</em> → Find: women banned from university in Poland, poverty in Paris.
+          </div>
+        </Accordion>
+
+        <Accordion title="💭 Inference & Open Questions" icon="💭">
+          <p>Open questions ask you to connect ideas and give your interpretation. The answer is not always word-for-word in the text — you must think.</p>
+          <div className="rule-box" style={{ marginTop: '0.5rem' }}>
+            <strong>Strategy for open answers:</strong><br />
+            1. Give a direct answer to the question.<br />
+            2. Quote or reference specific details from the text.<br />
+            3. Explain the connection. Write at least 2–3 sentences.
+          </div>
+          <ul style={{ paddingLeft: '1rem', lineHeight: 1.8, marginTop: '0.75rem' }}>
+            <li>Never just copy a sentence from the text — show that you understood it</li>
+            <li>Use signal words: <em>because, therefore, this shows that, for example, as a result</em></li>
+            <li>If the question says "Give two examples," make sure you give exactly two</li>
           </ul>
         </Accordion>
 
-        <Accordion title="📌 Inference Questions" icon="💭">
-          <p>Sometimes you must read between the lines. The answer is not stated directly — you must draw a logical conclusion from the information given.</p>
-          <div className="rule-box" style={{ marginTop: '0.5rem' }}>
-            <strong>Strategy:</strong> Eliminate wrong answers first. Look for clues in the surrounding sentences. The correct answer will be supported by the text even if not word-for-word.
+        <Accordion title="✍️ Writing a Complete Answer" icon="✍️">
+          <p>A complete answer to a reading question usually follows this structure:</p>
+          <div className="rule-box green" style={{ marginTop: '0.5rem' }}>
+            <strong>Model structure:</strong><br /><br />
+            <em>Question: "How did Marie Curie show determination?"</em><br /><br />
+            <strong>Answer:</strong> "Marie Curie showed determination in several ways. First, even though women were not allowed to attend university in Poland, she moved to Paris alone and lived in poverty to pursue her studies. Later, after her husband Pierre died, she did not give up — she continued her research and went on to win a second Nobel Prize. These examples show that obstacles only made her stronger."
           </div>
+          <p style={{ marginTop: '0.75rem', fontSize: '0.88rem', color: 'var(--gray-600)' }}>
+            Notice: direct answer → specific examples → conclusion. This structure works for any reading comprehension question.
+          </p>
         </Accordion>
       </div>
 

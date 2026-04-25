@@ -50,34 +50,35 @@ const workshopSections = [
     title: 'Part 4 — Reading Comprehension',
     tag: 'Reading',
     tagClass: 'tag-green',
-    instructions: 'Answer the following questions about Jacques Cousteau (write complete answers).',
+    instructions: 'Read the passage about Marie Curie carefully, then answer the questions in complete sentences.',
+    passage: `Marie Curie was born Maria Sklodowska in Warsaw, Poland, in 1867. As a young girl, she showed an extraordinary passion for learning, even though girls in Poland were not allowed to attend university at the time. Determined to continue her studies, Marie moved to Paris at the age of 24, where she enrolled at the Sorbonne University. She lived in a tiny, cold apartment and sometimes went without food to pay for her books, but nothing could stop her from pursuing her dream.\n\nIn Paris, Marie met her future husband, Pierre Curie, a respected physicist. Together, they worked tirelessly in their laboratory, often under difficult and dangerous conditions. Marie was fascinated by a mysterious property of certain minerals — the ability to emit energy without any external source. She called this property "radioactivity," a word she herself invented.\n\nIn 1898, Marie and Pierre discovered two new chemical elements: polonium, which she named after her beloved homeland Poland, and radium. Their discoveries changed the world of science forever. In 1903, Marie became the first woman to win the Nobel Prize in Physics. After Pierre's tragic death in 1906, she continued her research with remarkable determination. In 1911, she won a second Nobel Prize, this time in Chemistry, becoming the only person in history to win Nobel Prizes in two different sciences.\n\nDuring World War I, Marie developed mobile X-ray units — vehicles equipped with X-ray machines — to help treat wounded soldiers on the front lines. These units saved thousands of lives. Despite all her extraordinary contributions, Marie faced discrimination throughout her career because she was a woman and a foreigner. She died in 1934 from a blood disease caused by years of exposure to radiation. Today, she is remembered as one of the greatest scientists in history and a symbol of courage, determination, and intellectual brilliance.`,
     questions: [
       {
         id: 'r1',
-        text: '1. What is the main purpose of the Jacques Cousteau text?',
-        answer: 'To introduce readers to the life and achievements of Jacques-Yves Cousteau.',
-        acceptedAnswers: ['introduce', 'life', 'achievements'],
-        explanation: 'The text covers his childhood, inventions, WWII service, and films — it\'s a biographical introduction.',
+        text: '1. What obstacles did Marie Curie have to overcome in order to pursue her education?',
+        answer: 'Girls were not allowed to attend university in Poland, so she moved to Paris. She also lived in poverty and sometimes went without food to pay for her books.',
+        acceptedAnswers: ['university', 'poland', 'paris', 'poverty', 'food', 'woman', 'not allowed'],
+        explanation: 'Two key obstacles: (1) women were banned from university in Poland, so she had to move abroad; (2) extreme poverty in Paris — she went without food to buy books.',
         isOpen: true,
-        minWords: 8,
+        minWords: 10,
       },
       {
         id: 'r2',
-        text: '2. What happened to Cousteau in the car accident?',
-        answer: 'He was seriously injured with two broken arms.',
-        acceptedAnswers: ['broken arms', 'two arms', 'broken'],
-        explanation: 'Text says: "seriously injured with two broken arms."',
+        text: '2. What did Marie Curie mean by the word "radioactivity," and why was this discovery important?',
+        answer: 'Radioactivity is the ability of certain minerals to emit energy without any external source. It was important because it changed the world of science forever and led to advances in medicine and physics.',
+        acceptedAnswers: ['emit', 'energy', 'minerals', 'radioactiv', 'changed', 'science', 'important'],
+        explanation: 'Radioactivity = ability of minerals to emit energy on their own. It was revolutionary — it redefined how scientists understood matter and energy, and led to medical and nuclear advances.',
         isOpen: true,
-        minWords: 5,
+        minWords: 12,
       },
       {
         id: 'r3',
-        text: '3. Why did Cousteau develop underwater breathing equipment?',
-        answer: 'To extend his underwater investigations / to be able to stay underwater for long periods and explore.',
-        acceptedAnswers: ['underwater', 'explore', 'investigations', 'recovery', 'strength'],
-        explanation: 'He began swimming to recover, rediscovered his ocean passion, and developed the Aqua-Lung.',
+        text: '3. How did Marie Curie show courage and determination throughout her life? Give at least two examples from the text.',
+        answer: 'She moved alone to Paris to study despite being poor and facing restrictions as a woman. She continued research after her husband\'s death. She developed X-ray units during WWI to save lives despite the dangers of radiation.',
+        acceptedAnswers: ['paris', 'continued', 'research', 'husband', 'x-ray', 'wwi', 'world war', 'discrimination', 'determination', 'poor'],
+        explanation: 'Key examples: (1) Moved to Paris alone and lived in poverty to study; (2) Continued research after Pierre died; (3) Built mobile X-ray units during WWI despite personal risk.',
         isOpen: true,
-        minWords: 8,
+        minWords: 20,
       },
     ]
   },
@@ -496,6 +497,15 @@ export default function Workshop() {
         <p style={{ fontSize: '0.9rem', color: 'var(--gray-600)', marginBottom: '1.5rem', fontStyle: 'italic' }}>
           {section.instructions}
         </p>
+
+        {section.passage && (
+          <div style={{ background: '#f8f7f4', border: '1px solid #e5e0d8', borderRadius: 12, padding: '1.25rem', marginBottom: '1.5rem' }}>
+            <div style={{ fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--gray-400)', marginBottom: '0.75rem' }}>Reading Passage</div>
+            {section.passage.split('\n\n').map((para, i) => (
+              <p key={i} style={{ fontSize: '0.92rem', lineHeight: 1.75, marginBottom: '0.75rem', color: 'var(--gray-700)' }}>{para}</p>
+            ))}
+          </div>
+        )}
 
         {section.questions.map((q, i) => (
           <div key={q.id} style={{ marginBottom: '1.5rem' }}>
