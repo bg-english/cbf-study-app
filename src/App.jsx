@@ -7,6 +7,56 @@ import Workshop from './Workshop'
 const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || ''
 const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID || ''
 
+// ─── ALLOWED EMAILS ───────────────────────────────────────────────────────────
+const ALLOWED_EMAILS = new Set([
+  // Teacher
+  'edoardo.ortiz77@gmail.com',
+  // 8th Blue
+  'fiorellaaronna@redboston.edu.co',
+  'mathiasbello@redboston.edu.co',
+  'danette@redboston.edu.co',
+  'juan.s.calvo@redboston.edu.co',
+  'diegocastilla@redboston.edu.co',
+  'sebastiancas@redboston.edu.co',
+  'gabrieladiaz@redboston.edu.co',
+  'lionelfloriano@redboston.edu.co',
+  'valerielizarazo@redboston.edu.co',
+  'sofiamaradey@redboston.edu.co',
+  'samuel@redboston.edu.co',
+  'miguelpanciera@redboston.edu.co',
+  'lucianapedraza@redboston.edu.co',
+  'sarahperez@redboston.edu.co',
+  'samuelporto@redboston.edu.co',
+  'jose@redboston.edu.co',
+  'valentinareyes@redboston.edu.co',
+  'nadiarodriguez@redboston.edu.co',
+  'kendallrojano@redboston.edu.co',
+  'samuelsabalza@redboston.edu.co',
+  'eesierra@redboston.edu.co',
+  // 8th Red
+  'alejandraalvarez@redboston.edu.co',
+  'sofiaarevalomin@redboston.edu.co',
+  'victorias@redboston.edu.co',
+  'josecastellon@redboston.edu.co',
+  'andreschima@redboston.edu.co',
+  'cristinacontreras@redboston.edu.co',
+  'susancrespo@redboston.edu.co',
+  'viviangil@redboston.edu.co',
+  'andresgonzalez@redboston.edu.co',
+  'nicolemanosalva@redboston.edu.co',
+  'valentinomartinez@redboston.edu.co',
+  'sarameza@redboston.edu.co',
+  'juanseortiz@redboston.edu.co',
+  'mateopachon@redboston.edu.co',
+  'marianapareja@redboston.edu.co',
+  'moisespomarico@redboston.edu.co',
+  'santiagoporto@redboston.edu.co',
+  'isabelpua@redboston.edu.co',
+  'maryannrenteria@redboston.edu.co',
+  'juanesromero@redboston.edu.co',
+  'dannasarmiento@redboston.edu.co',
+])
+
 const tabs = [
   { id: 'home', label: 'Home', icon: '🏠' },
   { id: 'theory', label: 'Theory', icon: '📚' },
@@ -29,6 +79,10 @@ function LoginScreen({ onLogin }) {
     if (!trimName) { setError('Please enter your full name.'); return }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimEmail)) {
       setError('Please enter a valid email address.')
+      return
+    }
+    if (!ALLOWED_EMAILS.has(trimEmail)) {
+      setError('This email is not registered for this app. Check with your teacher.')
       return
     }
 
