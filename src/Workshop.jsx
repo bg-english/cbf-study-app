@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import judahImg from './assets/judah-lion.png'
+import logoImg from './assets/logo-boston-flex.png'
 
 // ─── WORKSHOP QUESTIONS ───────────────────────────────────────────────────
 const workshopSections = [
@@ -419,7 +421,17 @@ export default function Workshop({ studentName, studentEmail }) {
 
   return (
     <div className="section">
-      <div className="section-header">
+      <div className="section-header" style={{ position: 'relative' }}>
+        <img src={judahImg} alt="" aria-hidden="true" style={{
+          position: 'absolute', right: 0, bottom: 0,
+          height: 90, opacity: 0.82,
+          pointerEvents: 'none', userSelect: 'none',
+          filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.15))',
+        }} />
+        <img src={logoImg} alt="" aria-hidden="true" style={{
+          display: 'block', margin: '0 auto 0.75rem',
+          height: 56, opacity: 0.9,
+        }} />
         <h2>🏆 Final Workshop</h2>
         <p>Hi <strong>{studentName.split(' ')[0]}</strong>! Complete all sections — your corrected PDF will be sent to the teacher automatically.</p>
       </div>

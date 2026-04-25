@@ -3,6 +3,8 @@ import './index.css'
 import Theory from './Theory'
 import Practice from './Practice'
 import Workshop from './Workshop'
+import logoImg from './assets/logo-boston-flex.png'
+import judahImg from './assets/judah-lion.png'
 
 const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || ''
 const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID || ''
@@ -118,9 +120,19 @@ function LoginScreen({ onLogin }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%)',
+      background: 'linear-gradient(135deg, var(--navy) 0%, #0040b0 50%, var(--cbf-red) 100%)',
       padding: '1.25rem',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
+      {/* Judah decoration — login background */}
+      <img src={judahImg} alt="" aria-hidden="true" style={{
+        position: 'absolute', bottom: 0, right: 0,
+        height: 'clamp(180px, 35vw, 320px)',
+        opacity: 0.18,
+        pointerEvents: 'none',
+        userSelect: 'none',
+      }} />
       <div style={{
         background: 'white',
         borderRadius: 'var(--radius-lg)',
@@ -128,10 +140,17 @@ function LoginScreen({ onLogin }) {
         width: '100%',
         maxWidth: 460,
         boxShadow: '0 32px 80px rgba(0,0,0,0.35)',
+        position: 'relative',
+        zIndex: 1,
       }}>
         {/* Logo / Header */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div style={{ fontSize: '3.5rem', lineHeight: 1, marginBottom: '0.75rem' }}>📚</div>
+          <img src={logoImg} alt="Colegio Boston Flexible" style={{
+            width: 'clamp(72px, 18vw, 96px)',
+            height: 'auto',
+            marginBottom: '0.85rem',
+            filter: 'drop-shadow(0 4px 12px rgba(0,48,135,0.2))',
+          }} />
           <h1 style={{
             fontSize: 'clamp(1.25rem, 4vw, 1.75rem)',
             color: 'var(--navy)',
@@ -219,7 +238,24 @@ function LoginScreen({ onLogin }) {
 function Home({ setTab, userName }) {
   return (
     <>
-      <div className="hero">
+      <div className="hero" style={{ position: 'relative' }}>
+        {/* Judah mascot — left side decoration */}
+        <img src={judahImg} alt="" aria-hidden="true" style={{
+          position: 'absolute', bottom: 0, left: 'clamp(0px, 2vw, 24px)',
+          height: 'clamp(120px, 22vw, 200px)',
+          opacity: 0.92,
+          pointerEvents: 'none',
+          userSelect: 'none',
+          filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.3))',
+        }} />
+        {/* Logo — right side decoration */}
+        <img src={logoImg} alt="" aria-hidden="true" style={{
+          position: 'absolute', top: 16, right: 'clamp(8px, 2vw, 24px)',
+          height: 'clamp(48px, 8vw, 72px)',
+          opacity: 0.85,
+          pointerEvents: 'none',
+          userSelect: 'none',
+        }} />
         <div className="hero-badge">📖 CBF · Language Arts 8th Grade · First Trimester</div>
         <h1>Welcome, <span>{userName.split(' ')[0]}</span>!</h1>
         <p>Everything you need to ace your final exam. Theory, practice activities, and a graded workshop — all in one place.</p>
@@ -274,7 +310,14 @@ function Home({ setTab, userName }) {
         </div>
 
         {/* Tip */}
-        <div style={{ background: 'linear-gradient(135deg, var(--navy), var(--navy-light))', borderRadius: 'var(--radius-lg)', padding: '1.5rem', color: 'white', textAlign: 'center' }}>
+        <div style={{ background: 'linear-gradient(135deg, var(--navy), var(--cbf-red))', borderRadius: 'var(--radius-lg)', padding: '1.5rem 1.5rem 1.5rem 180px', color: 'white', textAlign: 'center', position: 'relative', overflow: 'hidden', minHeight: 140 }}>
+          <img src={judahImg} alt="" aria-hidden="true" style={{
+            position: 'absolute', bottom: 0, left: 0,
+            height: '140px',
+            pointerEvents: 'none',
+            userSelect: 'none',
+            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.25))',
+          }} />
           <div style={{ fontSize: '1.5rem', marginBottom: 8 }}>💡</div>
           <h3 style={{ color: 'var(--gold-light)', marginBottom: 8 }}>Study Strategy</h3>
           <p style={{ fontSize: '0.9rem', opacity: 0.85, lineHeight: 1.7 }}>
@@ -306,7 +349,10 @@ export default function App() {
   return (
     <div>
       <nav className="nav">
-        <div className="nav-logo">CBF Language Arts</div>
+        <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <img src={logoImg} alt="CBF" style={{ height: 38, width: 'auto', flexShrink: 0 }} />
+          <span>CBF Language Arts</span>
+        </div>
         <div className="nav-tabs">
           {tabs.map(t => (
             <button

@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import judahImg from './assets/judah-lion.png'
+import logoImg from './assets/logo-boston-flex.png'
 
 const Accordion = ({ title, icon, children, defaultOpen = false }) => {
   const [open, setOpen] = useState(defaultOpen)
@@ -43,7 +45,17 @@ const SignalBox = ({ words }) => (
 export default function Theory() {
   return (
     <div className="section">
-      <div className="section-header">
+      <div className="section-header" style={{ position: 'relative' }}>
+        <img src={judahImg} alt="" aria-hidden="true" style={{
+          position: 'absolute', right: 0, bottom: 0,
+          height: 90, opacity: 0.82,
+          pointerEvents: 'none', userSelect: 'none',
+          filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.15))',
+        }} />
+        <img src={logoImg} alt="" aria-hidden="true" style={{
+          display: 'block', margin: '0 auto 0.75rem',
+          height: 56, opacity: 0.9,
+        }} />
         <h2>📚 Theory & Grammar Review</h2>
         <p>Detailed explanations of every topic in your Language Arts exam. Study each section, open the accordions, and check the examples until you feel confident.</p>
       </div>
