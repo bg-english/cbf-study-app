@@ -176,6 +176,68 @@ const flashcards = [
   { front: "Negative: used to (standard form)", back: "→ didn't use to + base verb (e.g. didn't use to enjoy)" },
 ]
 
+// ─── READING COMPREHENSION ────────────────────────────────────────────────
+const readingPassage = {
+  title: 'Your Brain on Video Games',
+  text: [
+    `For many teenagers, video games are a daily activity — and parents often worry about the time their children spend in front of screens. But what does science actually say about video games and the brain? The answer might surprise you.`,
+    `Research shows that playing video games can have several positive effects on the brain. Action games, for example, improve a player's ability to track multiple objects at the same time and to react quickly to unexpected events. Scientists at the University of Rochester found that people who played fast-paced action games made decisions 25% faster than non-gamers, without losing accuracy. Experts believe this happens because video games train the brain to process information more efficiently.`,
+    `Video games can also develop problem-solving skills. Games like Minecraft require players to build structures, manage resources, and think creatively. Role-playing games challenge players to make complex decisions and plan strategies. Researchers at Michigan State University found a clear link between video game playing and greater creativity in children and teenagers.`,
+    `However, not all the news is positive. Spending too many hours gaming can disrupt sleep patterns, as the blue light from screens interferes with the brain's production of melatonin — the hormone that makes us feel sleepy. Excessive gaming can also lead to social isolation if it replaces face-to-face time with friends and family.`,
+    `The key, experts agree, is balance. Video games, like many things in life, are most beneficial when enjoyed in moderation and combined with physical activity, social time, and academic effort. The brain is an incredibly flexible organ — and how we choose to train it every day matters more than we might think.`,
+  ],
+  questions: [
+    {
+      id: 'rq1',
+      question: 'What did scientists at the University of Rochester discover about gamers?',
+      options: [
+        'They sleep better than non-gamers',
+        'They make decisions 25% faster than non-gamers',
+        'They are 25% more intelligent than non-gamers',
+        'They react more slowly to unexpected events',
+      ],
+      answer: 1,
+      explanation: 'The text states: "people who played fast-paced action games made decisions 25% faster than non-gamers, without losing accuracy."',
+    },
+    {
+      id: 'rq2',
+      question: 'According to the text, why can video games negatively affect sleep?',
+      options: [
+        'Because gamers stay up too late playing',
+        'Because the sound effects are too stimulating',
+        'Because blue light from screens reduces melatonin production',
+        'Because competitive games cause too much stress',
+      ],
+      answer: 2,
+      explanation: 'The text says "blue light from screens interferes with the brain\'s production of melatonin — the hormone that makes us feel sleepy."',
+    },
+    {
+      id: 'rq3',
+      question: 'Which game does the text use as an example of developing creativity?',
+      options: ['Call of Duty', 'Fortnite', 'Minecraft', 'FIFA'],
+      answer: 2,
+      explanation: 'The text specifically mentions Minecraft: "Games like Minecraft require players to build structures, manage resources, and think creatively."',
+    },
+    {
+      id: 'rq4',
+      question: 'What is the author\'s main message about video games?',
+      options: [
+        'Video games are harmful and teenagers should stop playing them',
+        'Video games are always beneficial for the brain',
+        'Only action games have positive effects',
+        'Video games can be good or bad depending on how they are used',
+      ],
+      answer: 3,
+      explanation: 'The author concludes with "balance" and "moderation" — the text presents both benefits and risks, making the main message that it depends on how games are used.',
+    },
+  ],
+  openQuestion: {
+    id: 'rq5',
+    question: 'In your own words, explain how video games can both help AND hurt a teenager. Use at least two specific ideas from the text.',
+    modelAnswer: 'Video games can help teenagers by improving decision-making speed and developing problem-solving skills and creativity (as shown in games like Minecraft). However, they can also hurt teenagers by disrupting sleep — because the blue light from screens reduces melatonin — and by causing social isolation if gaming replaces time with friends and family. The key is balance and moderation.',
+  },
+}
+
 // ─── COMPONENTS ───────────────────────────────────────────────────────────
 function MCQuestion({ q, onAnswer, answered }) {
   const [selected, setSelected] = useState(null)
@@ -407,6 +469,80 @@ function Flashcards() {
   )
 }
 
+function ReadingPractice() {
+  const [mcScores, setMcScores] = useState({})
+  const [openAnswer, setOpenAnswer] = useState('')
+  const [openSubmitted, setOpenSubmitted] = useState(false)
+
+  const correct = Object.values(mcScores).filter(Boolean).length
+  const total = readingPassage.questions.length
+
+  return (
+    <div>
+      {/* Passage */}
+      <div style={{ background: '#f8f7f4', border: '1px solid #e5e0d8', borderRadius: 14, padding: '1.5rem', marginBottom: '2rem' }}>
+        <h3 style={{ fontSize: '1.15rem', color: 'var(--navy)', marginBottom: '1.25rem', fontFamily: 'var(--font-serif)' }}>
+          {readingPassage.title}
+        </h3>
+        {readingPassage.text.map((para, i) => (
+          <p key={i} style={{ fontSize: '0.93rem', lineHeight: 1.85, marginBottom: '0.9rem', color: '#3a3530' }}>{para}</p>
+        ))}
+      </div>
+
+      {/* Score */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+        <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Reading Score</span>
+        <span style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '1.05rem' }}>{correct} / {total} MC</span>
+      </div>
+      <div className="progress-bar" style={{ marginBottom: '2rem' }}>
+        <div className="progress-fill" style={{ width: `${(correct / total) * 100}%` }} />
+      </div>
+
+      {/* MC Questions */}
+      {readingPassage.questions.map(q => (
+        <MCQuestion
+          key={q.id}
+          q={q}
+          answered={mcScores[q.id] !== undefined}
+          onAnswer={correct => setMcScores(s => ({ ...s, [q.id]: correct }))}
+        />
+      ))}
+
+      {/* Open Question */}
+      <div className="question-card">
+        <div className="question-number">Open Response</div>
+        <div className="question-text">{readingPassage.openQuestion.question}</div>
+        <textarea
+          className="workshop-textarea"
+          value={openAnswer}
+          onChange={e => setOpenAnswer(e.target.value)}
+          placeholder="Write your answer here… (at least 2 ideas from the text)"
+          rows={5}
+          disabled={openSubmitted}
+          style={{ fontSize: '16px' }}
+        />
+        {!openSubmitted ? (
+          <button
+            className="btn btn-primary btn-sm"
+            style={{ marginTop: '0.75rem' }}
+            onClick={() => setOpenSubmitted(true)}
+            disabled={openAnswer.trim().split(/\s+/).length < 15}
+          >
+            ✓ Submit Answer
+          </button>
+        ) : (
+          <div style={{ marginTop: '1rem' }}>
+            <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 10, padding: '1rem', fontSize: '0.88rem' }}>
+              <strong style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--navy)' }}>📝 Model Answer — Compare with yours:</strong>
+              <p style={{ lineHeight: 1.7, color: '#3a3a5c', margin: 0 }}>{readingPassage.openQuestion.modelAnswer}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 // ─── MAIN PRACTICE COMPONENT ──────────────────────────────────────────────
 export default function Practice({ onScoreUpdate }) {
   const [mcScores, setMcScores] = useState({})
@@ -441,6 +577,7 @@ export default function Practice({ onScoreUpdate }) {
         {[
           { key: 'mc', label: '📝 Multiple Choice', count: `${mcCorrect}/${mcQuestions.length}` },
           { key: 'fill', label: '✏️ Fill in the Blank', count: `${fillCorrect}/${fillQuestions.length}` },
+          { key: 'reading', label: '📖 Reading', count: '4 MC + 1 open' },
           { key: 'flash', label: '🃏 Flashcards', count: '10 cards' },
           { key: 'match', label: '🔗 Matching', count: '6 pairs' },
         ].map(tab => (
@@ -491,6 +628,19 @@ export default function Practice({ onScoreUpdate }) {
               onAnswer={(correct) => setFillScores(s => ({ ...s, [q.id]: correct }))}
             />
           ))}
+        </div>
+      )}
+
+      {/* READING */}
+      {activeGame === 'reading' && (
+        <div>
+          <div className="card" style={{ background: '#f0fdf4', marginBottom: '1.5rem' }}>
+            <strong>📖 Reading Comprehension</strong>
+            <p style={{ fontSize: '0.88rem', color: 'var(--gray-600)', marginTop: 4 }}>
+              Read the text carefully, then answer the questions. Use the passage to support your answers!
+            </p>
+          </div>
+          <ReadingPractice />
         </div>
       )}
 
